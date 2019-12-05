@@ -2,6 +2,7 @@ package com.codetutor.lottiedemo;
 
 import android.os.Bundle;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -15,7 +16,7 @@ import android.widget.TextView;
 public class SecondActivity extends AppCompatActivity {
 
     TextView textView;
-    ProgressBar progressBar;
+    LottieAnimationView busyAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,9 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         textView = (TextView)findViewById(R.id.textView);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        busyAnimation = (LottieAnimationView) findViewById(R.id.loadinAnimation);
 
-        progressBar.setVisibility(View.VISIBLE);
+        busyAnimation.setVisibility(View.VISIBLE);
         textView.setVisibility(View.INVISIBLE);
 
         new Thread(new Runnable() {
@@ -36,7 +37,7 @@ public class SecondActivity extends AppCompatActivity {
                     SecondActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            progressBar.setVisibility(View.INVISIBLE);
+                            busyAnimation.setVisibility(View.INVISIBLE);
                             textView.setVisibility(View.VISIBLE);
                         }
                     });
